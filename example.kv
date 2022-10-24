@@ -1,0 +1,152 @@
+<MyGrid>
+    orientation: "vertical"
+    label_widget: label_widget
+    Button:
+        pos: root.right - self.width , root.top - self.height
+        text: 'Add Button'
+        on_press: root.on_press_added()
+    Button:
+        pos: root.x, root.top - self.height
+        text: 'Remove Button'
+        on_press: root.on_press_remove()
+    Label:
+        id: label_widget
+        text: 'widget'
+    Button: 
+        id: slider
+        visible: True
+        opacity: 1 if self.visible else 0
+        disabled: not self.visible
+        on_press: self.visible = False
+<MyGrid>
+    orientation: "vertical"
+    canvas:
+        Color:
+            rgb: 255, 255, 255
+        Rectangle:
+            id: ellipse
+            pos: self.pos
+            size: self.size
+    Button: 
+        id: voice_btn
+        size: 70, 70
+        pos: root.right / 2 - self.width+7, root.top / 2 - self.height+2
+        on_press: root.voise_press()
+    RelativeLayout:
+        size: 150, 150
+        canvas:
+            Color:
+                rgb: 0, 0, 1
+            Ellipse:
+                pos: root.right / 2 - self.width + 75, root.top / 2 - self.height + 50
+                size: self.width, self.height
+                source: "assets/micro.ico"
+        
+    Button:
+        id: settings_btn
+        size: 35, 35
+        pos: root.right - self.width - 18, root.top - self.height - 18
+        on_press: root.settings_press()
+        Image:
+            source: "assets/settings.ico"
+            size: 75, 75
+            pos: root.right - self.width, root.top - self.height
+MDScreenManager:
+
+    MDScreen:
+        name: "screen A"
+        md_bg_color: "lightblue"
+
+        MDRaisedButton:
+            pos_hint: {"center_x": 0.89, "center_y": 0.946}
+            size: 70,65
+            on_release:
+                root.current_hero = "hero"
+                root.current = "screen B"
+            FitImage:
+                source: "assets/settings.ico"
+
+        MDHeroFrom:
+            id: hero_from
+            tag: "hero"
+            color: 0,0,0
+            size_hint: None, None
+            size: "120dp", "120dp"
+            pos_hint: {"center_x": 0.89, "center_y": 0.946}
+            x: 24
+
+    MDScreen:
+        name: "screen B"
+        hero_to: hero_to
+        md_bg_color: "cadetblue"
+
+        MDHeroTo:
+            id: hero_to
+            size_hint: None, None
+            size: "120dp", "120dp"
+            pos_hint: {"center_x": 0.1112, "center_y": 0.946}
+
+        MDRaisedButton:
+            text: "Move Hero To Screen A"
+            pos_hint: {"center_x": .5}
+            y: "36dp"
+            on_release:
+                root.current_hero = "hero"
+                root.current = "screen A"
+
+MDScreenManager:
+
+    MDScreen:
+        name: "screen A"
+        md_bg_color: "lightblue"
+
+        MDRaisedButton:
+            pos_hint: {"center_x": 0.89, "center_y": 0.946}
+            size: 70,65
+            on_release:
+                root.current_hero = "hero"
+                root.current = "screen B"
+
+        MDHeroFrom:
+            id: hero_from
+            tag: "hero"
+            color: 0,0,0
+            size_hint: None, None
+            size: "120dp", "120dp"
+            pos_hint: {"center_x": 0.89, "center_y": 0.946}
+            x: 24
+
+            FitImage:
+                source: "assets/bg_settings.png"
+                size_hint: None, None
+                size: hero_from.size
+
+    MDScreen:
+        name: "screen B"
+        hero_to: hero_to
+        md_bg_color: "cadetblue"
+
+        MDHeroTo:
+            id: hero_to
+            size_hint: None, None
+            size: "520dp", "320dp"
+            pos_hint: {"center_x": .5, "center_y": .5}
+
+        MDRaisedButton:
+            text: "Move Hero To Screen A"
+            pos_hint: {"center_x": .5}
+            y: "36dp"
+            on_release:
+                root.current_hero = "hero"
+                root.current = "screen A"
+                
+<MagicButton@MagicBehavior+MDRectangleFlatButton>
+MDFloatLayout:
+    MagicButton:
+        id: voice_btn
+        size: 70, 70
+        pos: root.right / 2 - self.width+7, root.top / 2 - self.height+2
+        on_release: self.shrink() 
+
+        FitImage: 
+            source: "assets/micro.ico" 

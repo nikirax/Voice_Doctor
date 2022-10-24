@@ -1,0 +1,134 @@
+ScreenManager:
+    Screen:
+        name: 'main'
+        MDIconButton:
+            id: btn
+            icon: "assets/micro.png"
+            icon_size: "100sp"
+            on_press: app.switch_micro_style()
+            pos_hint: {"center_x": .5, "center_y": .5}
+        MDCard:
+            id: settings_card
+            card_open: False
+            size_hint: 0.001, 0.001
+            pos_hint: {"center_x": 1, "center_y": 1}
+            md_bg_color: "darkgrey" 
+            MDIconButton:
+                id:volume
+                icon: 'assets/volume.ico'
+                pos_hint: {'center_x':0.2, 'center_y': 0.8} 
+                size: 24, 24
+                disabled: True 
+                opacity: 1
+            MDSlider:
+                id: volume_slider
+                color: "blue" 
+                value: 50
+                hint: False
+                pos_hint: {'center_y': 0.8}
+                track_color_active: "black"
+                disabled: False
+                opacity: 1
+            MDLabel:
+                id: volume_value
+                text: f"{str(int(volume_slider.value))} %"
+                pos_hint: {'center_x':0.9, 'center_y': 0.8}
+                theme_text_color: "Custom"
+                text_color: "#1219f6"
+                opacity: 1
+            MDIconButton:
+                icon: "assets/docs.png"
+                size_hint: 0.23, 0.2
+                on_release: app.open_video()
+            MDIconButton:
+                id: switch_language
+                icon: 'assets/switch_language.ico'
+                pos_hint: {'center_x':0.1, 'center_y': 0.1} 
+                size: 24, 24 
+                opacity: 1
+        MDIconButton:
+            icon: "assets/settings.ico"
+            icon_size: "54sp"
+            pos: root.right - self.width, root.top - self.height
+            on_release: app.on_chevron()
+        MDSwitch:
+            width: "48sp"
+            pos_hint: {'center_x':0.9, 'center_y': 0.07}
+            icon_active: "assets/sun.ico"
+            icon_inactive: "assets/moon.png"
+            on_active: app.switch_main_theme()
+    Screen:
+        name: 'carousel'
+        MDCarousel:
+            id: carousel
+            pos_hint: {"center_x": .5, "center_y": .5}
+            MDRelativeLayout:
+                MDCard:
+                    id: tablet_card
+                    size_hint: 0.5, 0.7
+                    pos_hint: {"center_x": .5, "center_y": .5}
+                    md_bg_color: "grey"
+                MDLabel:
+                    id: label_1
+                    halign: 'center'
+                    valign: 'middle'
+                    font_size: "30pt"
+                    pos_hint: {"center_x": .5, "center_y": .58}
+                MDLabel:
+                    id: label_1_
+                    size_hint: 0.5, 0.7
+                    halign: 'left'
+                    valign: 'top'
+                    font_size: "14pt"
+                    pos_hint: {"center_x": .5, "center_y": .4}
+                Image:
+                    id: image_1
+                    size_hint: 0.8, 0.3
+                    pos_hint: {"center_x": .5, "center_y": .7}
+
+            MDRelativeLayout:
+                MDCard:
+                    id: tablet_card
+                    size_hint: 0.5, 0.7
+                    pos_hint: {"center_x": .5, "center_y": .5}
+                    md_bg_color: "grey"
+                MDLabel:
+                    id: label_2_
+                    halign: 'center'
+                    valign: 'middle'
+                    font_size: "30pt"
+                    pos_hint: {"center_x": .5, "center_y": .5}
+                MDLabel:
+                    id: label_2
+                    size_hint: 0.5, 0.5
+                    pos_hint: {"center_x": .6, "center_y": .5}
+                Image:
+                    id: image_2 
+                    size_hint: 0.3, 0.3
+                    pos_hint: {"y": .5, "x": .2}
+
+            MDRelativeLayout:
+                MDCard:
+                    id: tablet_card
+                    size_hint: 0.5, 0.7
+                    pos_hint: {"center_x": .5, "center_y": .5}
+                    md_bg_color: "grey"
+                MDLabel:
+                    id: label_3
+                    size_hint: 0.5, 0.5
+                    pos_hint: {"center_x": .6, "center_y": .5}
+                MDLabel:
+                    id: label_3_
+                    halign: 'center'
+                    valign: 'middle'
+                    font_size: "30pt"
+                    pos_hint: {"center_x": .5, "center_y": .5}
+                Image:
+                    id: image_3
+                    size_hint: 0.5, 0.5
+                    pos_hint: {"y": .5, "x": .2}
+        MDTextButton:
+            text: "Back"
+            text_color: "white"
+            pos_hint: {"center_x": .05, "center_y": .95}
+            on_press: app.Back_Main()

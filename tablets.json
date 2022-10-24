@@ -1,0 +1,17 @@
+{"analgesic" :[
+	{
+		"image": "assets/nurofen.png",
+		"name_ru": "Нурофен",
+		"name_en": "Nurofen",
+		"recomendation_ru" : "Оказывает обезболивающие действие",
+		"recomendation_en": "__non__"
+	},
+	{
+		"image": "assets/linex.png",
+		"name_ru": "Линекс",
+		"name_en": "Linex",
+		"recomendation_ru" : "Помогает от болей в животе",
+		"recomendation_en": "__non__"
+	}
+	]
+}
