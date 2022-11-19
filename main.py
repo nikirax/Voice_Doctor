@@ -20,71 +20,85 @@ with open("voice.kv", 'r') as file:
 
 class MainApp(MDApp):
 	def build(self):
-		self.theme_cls.theme_style_switch_animation = True
+		#self.theme_cls.theme_style_switch_animation = True
 		self.theme_cls.theme_style = "Dark"
 		self.theme_cls.material_style = "M3"
+		self.language = True
 		return Builder.load_string(KV)
+	def switch_language(self):
+		self.language = not(self.language)
 	def switch_main_theme(self):
 		self.theme_cls.theme_style = ("Dark" if self.theme_cls.theme_style == "Light" else "Light")
 	def switch_micro_style(self):
-		self.root.ids.btn.icon = "assets/micro_red.png"
+		#self.root.ids.btn.icon = "assets/micro_red.png"
 		#playsound("C:\\Users\\User\\Desktop\\шняга\\python_test\\voice_doc\\assets\\assistent.mp3")
 		Clock.schedule_once(self.Recognize_Stream_Audio, 0.0001)
 	def Recognize_Stream_Audio(self, dt):
-		filename = "assets/record.wav"
-		self.Stream_Microphone(filename)
-		self.root.ids.btn.icon = "assets/micro.png"
-		self.Recognize_Audio(filename)
+		try:
+			filename = "assets/record.wav"
+			self.Stream_Microphone(filename)
+			self.root.ids.btn.icon = "assets/micro.png"
+			self.Recognize_Audio(filename)
+		except:
+			print("Error Not Text")
 	def Stream_Microphone(self, filename):
-		chunk = 1024
-		FORMAT = pyaudio.paInt16
-		channels = 1
-		sample_rate = 44100
-		record_seconds = 5
-		p = pyaudio.PyAudio()
-		stream = p.open(format=FORMAT,
-						channels=channels,
-						rate=sample_rate,
-						input=True,
-						output=True,
-						frames_per_buffer=chunk)
-		frames = []
-		for i in range(int(44100 / chunk * record_seconds)):
-			data = stream.read(chunk)
-			frames.append(data)
-		stream.stop_stream()
-		stream.close()
-		p.terminate()
-		wf = wave.open(filename, "wb")
-		wf.setnchannels(channels)
-		wf.setsampwidth(p.get_sample_size(FORMAT))
-		wf.setframerate(sample_rate)
-		wf.writeframes(b"".join(frames))
-		wf.close()
+		try:
+			chunk = 1024
+			FORMAT = pyaudio.paInt16
+			channels = 1
+			sample_rate = 44100
+			record_seconds = 5
+			p = pyaudio.PyAudio()
+			stream = p.open(format=FORMAT,
+							channels=channels,
+							rate=sample_rate,
+							input=True,
+							output=True,
+							frames_per_buffer=chunk)
+			frames = []
+			for i in range(int(44100 / chunk * record_seconds)):
+				data = stream.read(chunk)
+				frames.append(data)
+			stream.stop_stream()
+			stream.close()
+			p.terminate()
+			wf = wave.open(filename, "wb")
+			wf.setnchannels(channels)
+			wf.setsampwidth(p.get_sample_size(FORMAT))
+			wf.setframerate(sample_rate)
+			wf.writeframes(b"".join(frames))
+			wf.close()
+		except:
+			print("Error Not Text")
 	def Recognize_Audio(self, filename):
-		# r = sr.Recognizer()
-		# text = ""
-		# with sr.AudioFile(filename) as source:
-		# 	audio_data = r.record(source)
-		# 	text = r.recognize_google(audio_data)
-		# remove(filename) 
-		# if text == "hello" or text == "Hello":
-		# 	self.Open_Tablets() 
-		# 	mytext = 'Привет я ассистент Аня, вот что я вам подобрала'
-		# 	language = 'ru'
-		# 	myobj = gTTS(text=mytext, lang=language, slow=False)
-		# 	path_voice = "assets/assistent.mp3"
-		# 	playsound("assets/assistent.mp3")
-		# 	myobj.save(path_voice)
-		self.Open_Tablets()
-	def Open_Tablets(self):
-		with open("tablets.json",'r') as file:
+		r = sr.Recognizer()
+		text = ""
+		if self.language == True:
+			loc = "ru-Ru"
+		else:
+			loc = "en-En"
+		with sr.AudioFile(filename) as source:
+			audio_data = r.record(source)
+			text = r.recognize_google(audio_data, language=loc)
+		remove(filename) 
+		text = text.lower()
+		if text == "болит живот" or text == "stomach aches":
+			self.Open_Tablets("analgesic") 
+		elif text == "болит голова" or text == "my head hurts":
+			self.Open_Tablets("ForBelly") 
+
+	def Open_Tablets(self, med):
+		if self.language == True:
+			loc = "en"
+		else:
+			loc = "ru"
+		with open("tablets.json",'r', encoding="utf8") as file:
 			a = json.load(file)
 		self.root.current = "carousel"
-		for i in range(0,2):
-			self.root.ids[f"label_{i+1}_"].text = a["analgesic"][i]["recomendation_en"]
-			self.root.ids[f"label_{i+1}"].text = a["analgesic"][i]["name_en"] 
-			self.root.ids[f"image_{i+1}"].source = a["analgesic"][i]["image"]
+		for i in range(0,3):
+			self.root.ids[f"label_{i+1}_"].text = a[med][i][f"recomendation_{loc}"]
+			self.root.ids[f"label_{i+1}"].text = a[med][i][f"name_{loc}"] 
+			self.root.ids[f"image_{i+1}"].source = a[med][i]["image"]
 	def Back_Main(self):
 		self.root.current = "main"
 
@@ -115,7 +129,7 @@ class MainApp(MDApp):
 			card.pos_hint["center_y"] -= 0.01
 		return True
 	def close_settings_card(self, dt):
-		settings_card_items = [self.root.ids.volume_slider,self.root.ids.volume_value,self.root.ids.volume,self.root.ids.switch_language]
+		settings_card_items = [self.root.ids.volume_slider,self.root.ids.volume_value,self.root.ids.volume,self.root.ids.switch_language,self.root.ids.docs]
 		card = self.root.ids.settings_card
 		if card.size_hint[0] <= 0.002:
 			for item in settings_card_items:
@@ -131,7 +145,7 @@ class MainApp(MDApp):
 		if card.size_hint[1] > 0.002:
 			card.size_hint[1] -= 0.01
 	def open_video(self):
-		webbrowser.open('https://t.me/hollosan', new=2)
+		webbrowser.open('https://github.com/nikirax/Voice_Doctor', new=2)
 
 
 MainApp().run()

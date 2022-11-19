@@ -37,13 +37,16 @@ ScreenManager:
                 text_color: "#1219f6"
                 opacity: 1
             MDIconButton:
+                id: docs
                 icon: "assets/docs.png"
                 size_hint: 0.23, 0.2
                 on_release: app.open_video()
+                opacity: 1
             MDIconButton:
                 id: switch_language
                 icon: 'assets/switch_language.ico'
                 pos_hint: {'center_x':0.1, 'center_y': 0.1} 
+                on_press: app.switch_language()
                 size: 24, 24 
                 opacity: 1
         MDIconButton:
@@ -93,19 +96,22 @@ ScreenManager:
                     pos_hint: {"center_x": .5, "center_y": .5}
                     md_bg_color: "grey"
                 MDLabel:
-                    id: label_2_
+                    id: label_2
                     halign: 'center'
                     valign: 'middle'
                     font_size: "30pt"
-                    pos_hint: {"center_x": .5, "center_y": .5}
+                    pos_hint: {"center_x": .5, "center_y": .58}
                 MDLabel:
-                    id: label_2
-                    size_hint: 0.5, 0.5
-                    pos_hint: {"center_x": .6, "center_y": .5}
+                    id: label_2_
+                    size_hint: 0.5, 0.7
+                    halign: 'left'
+                    valign: 'top'
+                    font_size: "14pt"
+                    pos_hint: {"center_x": .5, "center_y": .4}
                 Image:
                     id: image_2 
-                    size_hint: 0.3, 0.3
-                    pos_hint: {"y": .5, "x": .2}
+                    size_hint: 0.4, 0.4
+                    pos_hint: {"y": .5, "x": .3}
 
             MDRelativeLayout:
                 MDCard:
@@ -115,18 +121,21 @@ ScreenManager:
                     md_bg_color: "grey"
                 MDLabel:
                     id: label_3
-                    size_hint: 0.5, 0.5
-                    pos_hint: {"center_x": .6, "center_y": .5}
-                MDLabel:
-                    id: label_3_
                     halign: 'center'
                     valign: 'middle'
-                    font_size: "30pt"
-                    pos_hint: {"center_x": .5, "center_y": .5}
+                    font_size: "21pt"
+                    pos_hint: {"center_x": .5, "center_y": .58}
+                MDLabel:
+                    id: label_3_
+                    size_hint: 0.5, 0.7
+                    halign: 'left'
+                    valign: 'top'
+                    font_size: "14pt"
+                    pos_hint: {"center_x": .5, "center_y": .4}
                 Image:
                     id: image_3
-                    size_hint: 0.5, 0.5
-                    pos_hint: {"y": .5, "x": .2}
+                    size_hint: 0.4, 0.4
+                    pos_hint: {"y": .5, "x": .3}
         MDTextButton:
             text: "Back"
             text_color: "white"

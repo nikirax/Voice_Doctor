@@ -1,17 +1,48 @@
-{"analgesic" :[
+{
+"analgesic" :[
 	{
 		"image": "assets/nurofen.png",
 		"name_ru": "Нурофен",
 		"name_en": "Nurofen",
 		"recomendation_ru" : "Оказывает обезболивающие действие",
-		"recomendation_en": "__non__"
+		"recomendation_en": "It has an analgesic effect"
 	},
+	{
+		"image": "assets/ibuprofen.png",
+		"name_ru": "Ибупрофен",
+		"name_en": "Ibuprofen",
+		"recomendation_ru" : "Оказывает обезболивающие действие",
+		"recomendation_en": "It has an analgesic effect"
+	},
+	{
+		"image": "assets/acel.png",
+		"name_ru": "Ацетилсалициловая кислота",
+		"name_en": "Acetylsalicylic acid",
+		"recomendation_ru" : "Оказывает обезболивающие действие",
+		"recomendation_en": "It has an analgesic effect"
+	}
+	],
+"ForBelly":[
 	{
 		"image": "assets/linex.png",
 		"name_ru": "Линекс",
 		"name_en": "Linex",
 		"recomendation_ru" : "Помогает от болей в животе",
-		"recomendation_en": "__non__"
+		"recomendation_en": "Helps with abdominal pain"
+	},
+	{
+		"image": "assets/No-shpa.png",
+		"name_ru": "Но-шпа",
+		"name_en": "No-shpa",
+		"recomendation_ru" : "Помогает от болей в животе",
+		"recomendation_en": "Helps with abdominal pain"
+	},
+	{
+		"image": "assets/Cerucal.png",
+		"name_ru": "Церукал",
+		"name_en": "Cerucal",
+		"recomendation_ru" : "Помогает при укачивании и от тошноты",
+		"recomendation_en": "Helps with motion sickness and nausea"
 	}
-	]
+]
 }
