@@ -74,17 +74,20 @@ class MainApp(MDApp):
 		r = sr.Recognizer()
 		text = ""
 		if self.language == True:
-			loc = "ru-Ru"
-		else:
 			loc = "en-En"
+		else:
+			loc = "ru-Ru"
 		with sr.AudioFile(filename) as source:
 			audio_data = r.record(source)
 			text = r.recognize_google(audio_data, language=loc)
 		remove(filename) 
+		print(text) 
 		text = text.lower()
 		if text == "болит живот" or text == "stomach aches":
-			self.Open_Tablets("analgesic") 
-		elif text == "болит голова" or text == "my head hurts":
+			self.Open_Tablets("analgesic")
+			print(text) 
+		elif text == "болит голова" or text == "my head":
+			print(text)
 			self.Open_Tablets("ForBelly") 
 
 	def Open_Tablets(self, med):
@@ -103,7 +106,7 @@ class MainApp(MDApp):
 		self.root.current = "main"
 
 	def on_chevron(self):
-		settings_card_items = [self.root.ids.volume_slider,self.root.ids.volume_value,self.root.ids.volume,self.root.ids.switch_language]
+		settings_card_items = [self.root.ids.volume_slider,self.root.ids.volume_value,self.root.ids.volume,self.root.ids.switch_language,self.root.ids.docs]
 		card = self.root.ids.settings_card
 		if card.card_open == False:
 			card.size_hint = [0.001, 0.001]
