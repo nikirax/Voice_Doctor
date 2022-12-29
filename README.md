@@ -26,5 +26,5 @@ python main.py
 ```
 or
 ```bash
-python 3 main.py
+python3 main.py
 ```
