@@ -6,8 +6,10 @@ This app was created for a college project. I was the only one working on the co
 
 ### How install this app
 
-In order to install the application, download `.zip` or `clone this repository`. Then you need the file `requirements.txt` it contains all the necessary libraries to run. \n
+In order to install the application, download `.zip` or `clone this repository`. Then you need the file `requirements.txt` it contains all the necessary libraries to run. 
+
 `!!Attention to install this application you must have python and pip installed!!`
+
 Next, we write the command (it can be installed into a virtual space or use the one that is there, although it is only for UNIX OS systems):
 
 ```bash
